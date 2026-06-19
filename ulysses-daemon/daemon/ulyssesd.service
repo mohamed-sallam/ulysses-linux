@@ -1,0 +1,20 @@
+[Unit]
+Description=Ulysses Distraction Blocker Daemon
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/ulyssesd
+Restart=always
+RestartSec=1
+WatchdogSec=30
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.config/ulysses
+NoNewPrivileges=true
+AmbientCapabilities=CAP_NET_ADMIN CAP_SYS_PTRACE CAP_KILL
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,102 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<node>
+  <interface name="net.ulysses.Daemon">
+    <!-- Methods -->
+    <method name="StartSession">
+      <arg name="block_id" type="s" direction="in"/>
+      <arg name="lock_type" type="s" direction="in"/>
+      <arg name="lock_param" type="s" direction="in"/>
+      <arg name="session_id" type="s" direction="out"/>
+    </method>
+
+    <method name="EndSession">
+      <arg name="session_id" type="s" direction="in"/>
+      <arg name="auth_token" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="CreateTrigger">
+      <arg name="trigger_json" type="s" direction="in"/>
+      <arg name="uuid" type="s" direction="out"/>
+    </method>
+
+    <method name="DeleteTrigger">
+      <arg name="uuid" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="FireTrigger">
+      <arg name="uuid" type="s" direction="in"/>
+      <arg name="session_id" type="s" direction="out"/>
+    </method>
+
+    <method name="GetStatus">
+      <arg name="status_json" type="s" direction="out"/>
+    </method>
+
+    <method name="CreateBlock">
+      <arg name="block_json" type="s" direction="in"/>
+      <arg name="block_id" type="s" direction="out"/>
+    </method>
+
+    <method name="UpdateBlock">
+      <arg name="block_json" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="DeleteBlock">
+      <arg name="block_id" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="GetBlocks">
+      <arg name="blocks_json" type="s" direction="out"/>
+    </method>
+
+    <method name="CreateList">
+      <arg name="list_json" type="s" direction="in"/>
+      <arg name="list_id" type="s" direction="out"/>
+    </method>
+
+    <method name="UpdateList">
+      <arg name="list_json" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="DeleteList">
+      <arg name="list_id" type="s" direction="in"/>
+      <arg name="success" type="b" direction="out"/>
+    </method>
+
+    <method name="GetLists">
+      <arg name="lists_json" type="s" direction="out"/>
+    </method>
+
+    <method name="GetTriggers">
+      <arg name="triggers_json" type="s" direction="out"/>
+    </method>
+
+    <method name="GetActiveSessions">
+      <arg name="sessions_json" type="s" direction="out"/>
+    </method>
+
+    <!-- Signals -->
+    <signal name="SessionStarted">
+      <arg name="session_json" type="s"/>
+    </signal>
+
+    <signal name="SessionEnded">
+      <arg name="session_id" type="s"/>
+    </signal>
+
+    <signal name="TriggerFired">
+      <arg name="trigger_uuid" type="s"/>
+      <arg name="session_id" type="s"/>
+    </signal>
+
+    <signal name="BlocksChanged"/>
+    <signal name="ListsChanged"/>
+    <signal name="TriggersChanged"/>
+  </interface>
+</node>
